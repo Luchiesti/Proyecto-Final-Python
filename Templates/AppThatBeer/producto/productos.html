@@ -1,7 +1,9 @@
 {% extends 'index.html' %}
 {% block ContenidoQueCambia %}
+
 <h1>Nuestros productos:</h1>
-<br>
+    <a class="btn btn-light btn-xl" href="{% url 'AppThatBeerBuscarProducto' %}">FILTRAR POR VARIEDAD</a>
+    <br>
 {% for p in productos %}
     • <b>Nombre: {{p.nombre}}</b><br>
     • Variedad:{{p.variedad}}<br>
@@ -9,4 +11,6 @@
     • Codigo:{{p.codigo}}<br>
     • Codigo:{{p.descripcion}}<br>
 {% endfor %}
+    <a class="btn btn-light btn-xl" href="{% url 'AppThatBeerCrearProducto' %}">AGREGAR PRODUCTO</a>
+
 {% endblock %}

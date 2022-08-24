@@ -8,7 +8,7 @@ from AppThatBeer.forms import ProductoFormulario, ClienteFormulario, Distribuido
 
 def clientes(request):
 
-    return render(request, 'clientes.html')
+    return render(request, 'AppThatBeer/cliente/clientes.html')
 
 def distribuidores(request):
     contexto = {
@@ -23,12 +23,12 @@ def distribuidores(request):
 
         }
     }
-    return render(request, 'distribuidores.html', contexto)
+    return render(request, 'AppThatBeer/distribuidor/distribuidores.html', contexto)
 
 
 def productos(request):
     productoslistado = Producto.objects.all()
-    return render(request, 'productos.html', {"productos": productoslistado})
+    return render(request, 'AppThatBeer/producto/productos.html', {"productos": productoslistado})
 
 
 def inicio(request):
@@ -36,18 +36,18 @@ def inicio(request):
 
 
 def patrocinadores(request):
-    return render(request, 'patrocinadores.html')
+    return render(request, 'AppThatBeer/patrocinador/patrocinadores.html')
 
 
 def aboutus(request):
-    return render(request, 'aboutus.html')
+    return render(request, 'AppThatBeer/aboutus/aboutus.html')
 
 
 def noticias(request):
-    return render(request, 'noticias.html')
+    return render(request, 'AppThatBeer/noticias/noticias.html')
 
 
-def agregarCliente(request):
+def crearCliente(request):
     if request.method == 'POST':
         mi_formulario = ClienteFormulario(request.POST)
         print(mi_formulario)
@@ -65,13 +65,13 @@ def agregarCliente(request):
             cliente = Cliente(nombre=nombre, apellido=apellido, email=email, direccion=direccion, provincia=provincia, cp=cp, dni=dni)
             cliente.save()
 
-            return render(request, 'clientes.html')
+            return render(request, 'AppThatBeer/cliente/clientes.html')
     else:
         mi_formulario = ClienteFormulario()
-    return render(request, 'agregarcliente.html', {'mi_formulario':mi_formulario})
+    return render(request, 'AppThatBeer/cliente/crear.html', {'mi_formulario':mi_formulario})
 
 
-def agregarDistribuidor(request):
+def crearDistribuidor(request):
     if request.method == 'POST':
         mi_formulario = DistribuidorFormulario(request.POST)
         print(mi_formulario)
@@ -88,13 +88,13 @@ def agregarDistribuidor(request):
             distribuidor = Distribuidor(nombre=nombre, cuit=cuit, direccion=direccion, provincia=provincia, descuento=descuento, web=web)
             distribuidor.save()
 
-            return render(request, 'distribuidores.html')
+            return render(request, 'AppThatBeer/distribuidor/distribuidores.html')
     else:
         mi_formulario = DistribuidorFormulario()
-    return render(request, 'agregardistribuidor.html', {'mi_formulario':mi_formulario})
+    return render(request, 'AppThatBeer/distribuidor/crear.html', {'mi_formulario':mi_formulario})
 
 
-def agregarPatrocinador(request):
+def crearPatrocinador(request):
     if request.method == 'POST':
         mi_formulario = PatrocinadorFormulario(request.POST)
         print(mi_formulario)
@@ -110,13 +110,13 @@ def agregarPatrocinador(request):
             patrocinador = Patrocinador(nombre=nombre, rubro=rubro, slogan=slogan, antiguedad_anios=antiguedad_anios, web=web)
             patrocinador.save()
 
-            return render(request, 'patrocinadores.html')
+            return render(request, 'AppThatBeer/patrocinador/patrocinadores.html')
     else:
         mi_formulario = PatrocinadorFormulario()
-    return render(request, 'agregarpatrocinador.html', {'mi_formulario':mi_formulario})
+    return render(request, 'AppThatBeer/patrocinador/crear.html', {'mi_formulario':mi_formulario})
 
 
-def agregarProducto(request):
+def crearProducto(request):
     if request.method == 'POST':
         mi_formulario = ProductoFormulario(request.POST)
         print(mi_formulario)
@@ -132,8 +132,20 @@ def agregarProducto(request):
             producto = Producto(nombre=nombre, variedad=variedad, contenido_ml=contenido_ml, codigo=codigo, descripcion=descripcion)
             producto.save()
 
-            return render(request, 'productos.html')
+            return render(request, 'AppThatBeer/producto/productos.html')
     else:
         mi_formulario = ProductoFormulario()
-    return render(request, 'agregarproducto.html', {'mi_formulario':mi_formulario})
+    return render(request, 'AppThatBeer/producto/crear.html', {'mi_formulario':mi_formulario})
 
+def buscarProducto(request):
+    return render(request, 'AppThatBeer/producto/buscar.html')
+
+def buscar(request):
+    if request.GET['variedad']:
+        variedad = request.GET['variedad']
+        productos = Producto.objects.filter(variedad__contains=variedad)
+
+        return render(request, 'AppThatBeer/producto/resultadobusqueda.html', {'productos': productos, 'variedad': variedad})
+    else:
+        respuesta = 'No enviaste datos'
+    return HttpResponse(respuesta)

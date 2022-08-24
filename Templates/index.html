@@ -33,7 +33,7 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'AppThatBeerProductos' %}">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'AppThatBeerDistribuidores' %}">Distribuidores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'AppThatBeerClientes' %}">Clientes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#patrocinadores">Patrocinadores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'AppThatBeerPatrocinadores' %}">Patrocinadores</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'AppThatBeerNoticias' %}">Noticias</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'AppThatBeerAboutUs' %}">Sobre Nosotros</a></li>
 
@@ -68,7 +68,9 @@
                         •ALCOHOL: 7%
                         •IBU: 50   
                         </p>
-                        <a class="btn btn-light btn-xl" href="#services">PROBÁ NUESTRA "Ipa Nimo"</a>
+                        <a class="btn btn-light btn-xl disabled" href="#services">PROBÁ NUESTRA "Ipa Nimo"</a>
+                        <br>
+                        <a class="btn" href="{% url 'AppThatBeerNoticias' %}">Ver más noticias...</a>
                     </div>
                 </div>
             </div>
@@ -107,7 +109,7 @@
                             <h3 class="h4 mb-2">Hecho con amor</h3>
                             <p class="text-muted mb-0">La dedicación y el compromiso de nuestros empleados hacen a la excelencia de nuestro producto.</p>
                             <br>
-                            <a class="btn btn-light btn-xl" href="{% url 'AppThatBeerAboutUs' %}">CONOCE MÁS"</a>
+                            <a class="btn btn-light btn-xl" href="{% url 'AppThatBeerAboutUs' %}">CONOCE MÁS</a>
                         </div>
                     </div>
                 </div>

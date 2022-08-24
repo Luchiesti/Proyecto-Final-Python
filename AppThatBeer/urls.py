@@ -1,6 +1,7 @@
 from django.urls import path
 from AppThatBeer.models import Patrocinador
-from AppThatBeer.views import aboutus, agregarCliente, agregarDistribuidor, agregarPatrocinador, agregarProducto, clientes, distribuidores, noticias, productos, patrocinadores, inicio, aboutus, noticias
+from AppThatBeer.views import aboutus, crearCliente, crearDistribuidor, crearPatrocinador, crearProducto, clientes, \
+    distribuidores, noticias, productos, patrocinadores, inicio, aboutus, noticias, buscarProducto, buscar
 
 urlpatterns = [
     path('', inicio, name= 'AppThatBeerInicio'),
@@ -10,10 +11,10 @@ urlpatterns = [
     path('productos/', productos, name= 'AppThatBeerProductos'),
     path('sobrenosotros/', aboutus, name= 'AppThatBeerAboutUs'),
     path('noticias/', noticias, name= 'AppThatBeerNoticias'),
-    path('agregarcliente/', agregarCliente, name= 'AppThatBeerAgregarCliente'),
-    path('agregardistribuidor/', agregarDistribuidor, name= 'AppThatBeerAgregarDistribuidor'),
-    path('agregarpatrocinador/', agregarPatrocinador, name= 'AppThatBeerAgregarPatrocinador'),
-    path('agregarproducto/', agregarProducto, name= 'AppThatBeerAgregarProducto'),
-    
-
+    path('clientes/crear', crearCliente, name='AppThatBeerCrearCliente'),
+    path('distribuidores/crear', crearDistribuidor, name='AppThatBeerCrearDistribuidor'),
+    path('patrocinadores/crear', crearPatrocinador, name='AppThatBeerCrearPatrocinador'),
+    path('productos/crear', crearProducto, name='AppThatBeerCrearProducto'),
+    path('productos/buscar', buscarProducto, name='AppThatBeerBuscarProducto'),
+    path('buscar/', buscar, name='AppThatBeerBuscar')
 ]

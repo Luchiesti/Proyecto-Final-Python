@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block ContenidoQueCambia %}
+<h1>Buscar producto por variedad:</h1>
+
+    <form action="/AppThatBeer/buscar" method="GET">
+        <input type="text" name="variedad" id="variedad">
+        <input type="submit" value="Buscar producto">
+
+    </form>
+
+{% endblock %}

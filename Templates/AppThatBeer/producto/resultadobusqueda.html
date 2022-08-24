@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% block ContenidoQueCambia %}
+<h1>Estamos buscando la variedad:  {{ variedad }}</h1>
+
+    {% if productos %}
+    <ul>
+    {% for producto in productos %}
+        <li> {{ producto.nombre }} - {{ producto.variedad }}</li>
+
+    {% endfor %}
+
+    </ul>
+    {% endif %}
+
+{% endblock %}

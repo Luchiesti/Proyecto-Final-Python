@@ -6,5 +6,9 @@
 <br>
 {% for key, value in distribuidores.items %}
     <p><b>{{value}}</b></p>
+
 {% endfor %}
+
+    <a class="btn btn-light btn-xl" href="{% url 'AppThatBeerCrearDistribuidor' %}">AGREGAR DISTRIBUIDOR</a>
+
 {% endblock %}
