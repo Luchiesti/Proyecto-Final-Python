@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block ContenidoQueCambia %}
+<h1>Nuestros distribuidores:</h1>
+<br>
+<br>
+<br>
+{% for key, value in distribuidores.items %}
+    <p><b>{{value}}</b></p>
+{% endfor %}
+{% endblock %}
