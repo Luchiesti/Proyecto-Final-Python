@@ -1,13 +1,13 @@
 {% extends 'index.html' %}
 {% block ContenidoQueCambia %}
-<h5>Agregar un Producto:</h5>
+<h5>Editar Producto:</h5>
     <form action="" method="POST">
     {% csrf_token %}
         <table>
             {{ producto_form.as_table }}
         </table>
 
-        <input  class="btn btn-primary btn-lg" type="submit" value="Agregar Producto">
+        <input  class="btn btn-primary btn-lg" type="submit" value="Editar Producto">
     </form>
 
 {% endblock %}

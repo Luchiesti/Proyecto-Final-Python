@@ -115,6 +115,25 @@ def crearPatrocinador(request):
         mi_formulario = PatrocinadorFormulario()
     return render(request, 'AppThatBeer/patrocinador/crear.html', {'mi_formulario':mi_formulario})
 
+def buscarProducto(request):
+    return render(request, 'AppThatBeer/producto/buscar.html')
+
+def buscar(request):
+    if request.GET['variedad']:
+        variedad = request.GET['variedad']
+        productos = Producto.objects.filter(variedad__contains=variedad)
+
+        return render(request, 'AppThatBeer/producto/resultadobusqueda.html', {'productos': productos, 'variedad': variedad})
+    else:
+        respuesta = 'No enviaste datos'
+    return HttpResponse(respuesta)
+
+def leerProducto(request):
+    productos = Producto.objects.all()
+    contexto = {
+        'productos': productos
+    }
+    return render(request, 'AppThatBeer/producto/leer.html', contexto)
 
 def crearProducto(request):
     if request.method == 'POST':
@@ -129,23 +148,48 @@ def crearProducto(request):
             codigo = informacion['codigo']
             descripcion = informacion['descripcion']
 
-            producto = Producto(nombre=nombre, variedad=variedad, contenido_ml=contenido_ml, codigo=codigo, descripcion=descripcion)
+            producto = Producto(nombre=nombre, variedad=variedad, contenido_ml=contenido_ml, codigo=codigo,
+                                descripcion=descripcion)
             producto.save()
 
-            return render(request, 'AppThatBeer/producto/productos.html')
-    else:
-        mi_formulario = ProductoFormulario()
-    return render(request, 'AppThatBeer/producto/crear.html', {'mi_formulario':mi_formulario})
+            return redirect('AppThatBeerLeerProductos')
+        else:
+            return redirect('AppThatBeerInicio')
+    contexto = {
+        'producto_form': ProductoFormulario()
+    }
+    return render(request, 'AppThatBeer/producto/crear.html', contexto)
 
-def buscarProducto(request):
-    return render(request, 'AppThatBeer/producto/buscar.html')
+def eliminarProducto(request, codigo):
+    producto = Producto.objects.get(codigo=codigo)
+    producto.delete()
 
-def buscar(request):
-    if request.GET['variedad']:
-        variedad = request.GET['variedad']
-        productos = Producto.objects.filter(variedad__contains=variedad)
+    return redirect('AppThatBeerLeerProductos')
 
-        return render(request, 'AppThatBeer/producto/resultadobusqueda.html', {'productos': productos, 'variedad': variedad})
-    else:
-        respuesta = 'No enviaste datos'
-    return HttpResponse(respuesta)
+def editarProducto(request, codigo):
+    producto = Producto.objects.get(codigo=codigo)
+    producto_form = ProductoFormulario(initial={
+        'nombre':producto.nombre,
+        'variedad':producto.variedad,
+        'contenido_ml':producto.contenido_ml,
+        'codigo':producto.codigo,
+        'descripcion':producto.descripcion,
+    })
+
+    if request.method == 'POST':
+        mi_form = ProductoFormulario(request.POST)
+
+        if mi_form.is_valid():
+            info = mi_form.cleaned_data
+            producto.nombre = info['nombre']
+            producto.variedad = info['variedad']
+            producto.contenido_ml = info['contenido_ml']
+            producto.codigo = info['codigo']
+            producto.descripcion = info['descripcion']
+
+            producto.save()
+            return redirect('AppThatBeerLeerProductos')
+    contexto = {
+        'producto_form': producto_form,
+    }
+    return render(request, 'AppThatBeer/producto/editar.html', contexto)

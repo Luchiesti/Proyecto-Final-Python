@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block ContenidoQueCambia %}
+
+    {% if productos %}
+        <h5>Los productos disponibles son:</h5>
+
+        {% for producto in productos %}
+            <p>
+                Código: {{ producto.codigo }} -
+                Nombre: {{ producto.nombre }} -
+                Variedad: {{ producto.variedad }} -
+                Contenido neto: {{ producto.contenido_ml }} -
+                Descripción: {{ producto.descripcion }}
+                <a href="{% url 'AppThatBeerEditarProducto' producto.codigo %}">Editar</a>
+                <a href="{% url 'AppThatBeerEliminarProducto' producto.codigo %}">-X-</a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h5>No hay productos disponibles en este momento</h5>
+    {% endif %}
+        <a href="{% url 'AppThatBeerCrearProducto' %}">AGREGAR PRODUCTO</a>
+{% endblock %}
