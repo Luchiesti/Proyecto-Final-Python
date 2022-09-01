@@ -127,7 +127,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # para LOGIN
-
+LOGIN_URL = 'UserThatBeerLogin'
 
 # para IMAGENES
 MEDIA_URL = '/media/'

@@ -1,4 +1,6 @@
 from urllib import request
+
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader, Template, Context
@@ -7,7 +9,6 @@ from AppThatBeer.forms import ProductoFormulario, ClienteFormulario, Distribuido
 
 
 def clientes(request):
-
     return render(request, 'AppThatBeer/cliente/clientes.html')
 
 def distribuidores(request):
@@ -46,7 +47,7 @@ def aboutus(request):
 def noticias(request):
     return render(request, 'AppThatBeer/noticias/noticias.html')
 
-
+@login_required
 def crearCliente(request):
     if request.method == 'POST':
         mi_formulario = ClienteFormulario(request.POST)

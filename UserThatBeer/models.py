@@ -9,3 +9,6 @@ class Avatar(models.Model):
     # Al eliminar el usuario se elimina por 'cascada' el avatar
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='avatares', null=True, blank=True)
+
+    def __str__(self):
+        return self.user
