@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block ContenidoQueCambia %}
+    <h5>INICIO DE SESIÓN</h5>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Iniciar Sesión">
+    </form>
+
+{% endblock ContenidoQueCambia%}
