@@ -27,6 +27,7 @@
                 {% if user.is_authenticated %}
 
                 <li class="nav-item"><a class="nav-link">Usuario: {{ user.get_username }}</a></li>
+                <li class="nav-item"><img src="{{ user.avatar.imagen.url }}" alt=""></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'UserThatBeerLogout' %}">Log Out</a></li>
 
                 {% else %}
